@@ -1,23 +1,31 @@
-VALLA TACOS — PEDIDOS ONLINE
+VALLA TACOS — SISTEMA DE PEDIDOS PARA VERCEL
 
-Estructura:
-- index.html
-- styles.css
-- script.js
+Esta versión sustituye el envío por WhatsApp por un sistema real de pedidos:
+- El cliente hace el pedido desde la web.
+- /api/orders recibe y guarda el pedido.
+- Supabase almacena los pedidos.
+- /admin.html es un panel privado para el negocio.
+- El panel se actualiza automáticamente cada 10 segundos.
+- Estados: nuevo, aceptado, preparando, listo, entregado, cancelado.
 
-FUNCIONAMIENTO DEL PEDIDO:
-1. El cliente pulsa un producto y abre su ficha.
-2. Pulsa "Añadir al pedido +".
-3. Se abre el carrito y puede cambiar cantidades.
-4. Introduce nombre y teléfono.
-5. Elige recoger en local o domicilio.
-6. Pulsa "Enviar pedido por WhatsApp".
-7. Se abre WhatsApp con el pedido completo preparado para enviarlo al negocio.
+IMPORTANTE: la web NO funcionará para guardar pedidos hasta configurar Supabase y las variables de entorno en Vercel.
 
-WHATSAPP DEL NEGOCIO CONFIGURADO:
-+34 633 077 757
+1) Crea un proyecto Supabase.
+2) Abre SQL Editor y ejecuta el archivo supabase-schema.sql.
+3) En Vercel > Project Settings > Environment Variables añade:
+   SUPABASE_URL = URL del proyecto Supabase
+   SUPABASE_SERVICE_ROLE_KEY = service role key de Supabase (SOLO servidor)
+   ADMIN_PASSWORD = una contraseña fuerte para /admin.html
+   SESSION_SECRET = una cadena aleatoria larga (32+ caracteres)
+4) Haz un nuevo deploy.
+5) El panel privado estará en:
+   https://TU-DOMINIO.vercel.app/admin.html
 
-IMPORTANTE:
-- Esta versión no necesita servidor ni base de datos: el pedido llega al negocio por WhatsApp.
-- Para una solución más avanzada se puede añadir un panel privado, estados del pedido, historial y almacenamiento en una base de datos.
-- Confirmar con Valla Tacos precios, disponibilidad, horarios, zonas de reparto, gastos de envío, métodos de pago y alérgenos antes de publicar.
+SEGURIDAD
+- La service role key nunca aparece en HTML/JS del cliente.
+- La tabla orders tiene RLS activado y no tiene policies públicas.
+- El panel usa una cookie HttpOnly firmada.
+- No compartas las variables de entorno.
+
+PRÓXIMA MEJORA
+Cuando Valla Tacos tenga el sistema funcionando, se puede añadir email, notificaciones push o WhatsApp Business API sin cambiar el flujo del cliente.
