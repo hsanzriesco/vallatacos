@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>Pedidos · Valla Tacos</title>
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <section class="login-card" id="loginView">
+      <div class="logo">VT</div><p class="eyebrow">VALLA TACOS · PANEL</p><h1>Gestión de pedidos</h1>
+      <p>Acceso privado para el equipo de Valla Tacos.</p>
+      <form id="loginForm"><label>Contraseña<input id="password" type="password" required autocomplete="current-password"></label><button>Entrar</button><p id="loginError" class="error"></p></form>
+    </section>
+    <section class="dashboard hidden" id="dashboardView">
+      <header class="dashboard-head"><div><p class="eyebrow">PANEL PRIVADO</p><h1>Pedidos</h1><p id="lastUpdated">Actualizando…</p></div><div class="head-actions"><button id="refreshBtn">↻ Actualizar</button><button id="logoutBtn" class="ghost">Salir</button></div></header>
+      <div class="stats"><div><span>Nuevos</span><strong id="statNew">0</strong></div><div><span>En preparación</span><strong id="statPrep">0</strong></div><div><span>Ventas hoy</span><strong id="statSales">0,00 €</strong></div></div>
+      <div id="orders" class="orders"></div>
+      <div id="empty" class="empty hidden"><strong>No hay pedidos todavía.</strong><span>Los nuevos pedidos aparecerán aquí automáticamente.</span></div>
+    </section>
+  </main>
+  <script src="./admin.js" defer></script>
+</body>
+</html>
